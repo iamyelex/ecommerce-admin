@@ -1,10 +1,17 @@
-import { Button } from "@/components/ui/button";
+"use client";
+
+import { useStoreModal } from "@/hooks/use-store-modal";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <section className="p-4">
-      <p>Hello Admin Dashboard</p>
-      <Button variant="destructive">Click Me</Button>
-    </section>
-  );
+  const isOpen = useStoreModal((store) => store.isOpen);
+  const onOpen = useStoreModal((store) => store.onOpen);
+
+  useEffect(() => {
+    if (!isOpen) {
+      onOpen();
+    }
+  }, [isOpen, onOpen]);
+
+  return <section className="p-4">Root Page</section>;
 }
